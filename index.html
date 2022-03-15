@@ -14,15 +14,15 @@
     <div class="flex">
         <div class="flex-column">
             <div class="flex">
-                <div class="flex-column">
+                <div class="flex-column2">
                     <div>
                         <p class="small-grey-text">Søg</p>
                     </div>
                     <div class="flex">
-                        <input type="text" id="inpuf">
+                        <input type="text" id="inpuf" placeholder="Type here">
                     </div>
                 </div>
-                <div class="flex-column">
+                <div class="flex-column2">
                     <div>
                         <p class="small-grey-text">Filter</p>
                     </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="flex-column">
+                <div class="flex-column2">
                     <div>
                         <p class="small-grey-text">Klik for at søge</p>
                     </div>
@@ -47,13 +47,51 @@
             </div>
             <div class="flex">
                 <div style="border: 1px solid black; width: 100%">
-                  <h3>Search result:</h3>
+                  <h3 class="center-heading" style="background-color: black;">Search result:</h3>
                     <p id="hello"></p>
                     <p id="singlePersonRecord"></p>
                   
                 </div>
             </div>
-            <h3>All People</h3>
+            <h3 class="center-heading" style="background-color: black;">Add User</h3>
+            <div class="flex">
+                <div class="flex" style="border: 1px solid black; width: 100%">
+                    <form>
+                        <h3>User Details:</h3>
+                      <label for="fname" >First name:</label>
+                      <input type="text" id="fname"><br>
+                      <label for="lname" >Last name:</label>
+                      <input type="text" id="lname"><br>
+                      <label for="email" >Email:</label>
+                      <input type="text" id="email"><br>
+                      <label for="phonenr" >Phone number:</label>
+                      <input type="text" id="phonenr"><br>
+                      <label for="phonedesc" >Description:</label>
+                      <select id="phoneSelect">
+                          <option>Home</option>
+                          <option>Mobile</option>
+                          <option>Work</option>
+                      </select>
+                      <h3>Address</h3>
+                      <label for="adrstreet" >Street:</label>
+                      <input type="text" id="adrstreet"><br>
+                      <label for="adradditional" >Additional info:</label>
+                      <input type="text" id="adradditional"><br>
+                      <label for="adrcity" >City:</label>
+                      <input type="text" id="adrcity"><br>
+                      <label for="adrzip" >Zipcode:</label>
+                      <input type="text" id="adrzip"><br>
+                      <label for="hobbySelect" >Hobbies (ctrl click to select multiple hobbies):</label>
+                      <select id="hobbySelect" multiple>
+                        
+                    </select><br/><br/>
+                      <button id="addNewUserBtn">Submit</button><br/><br/>
+                    </form>
+                    <p id="confirmation"></p>
+
+                </div>
+            </div>
+            <h3 class="center-heading" style="background-color: black;">All People</h3>
             <div class="flex">
               <table class="table">
                 <thead>

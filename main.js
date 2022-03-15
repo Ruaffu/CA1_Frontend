@@ -2,6 +2,8 @@ import "./styles/style.css"
 // import "bootstrap/dist/css/bootstrap.css"
 import './facade'
 import facade from './facade'
+import './hobbyFacade'
+import hobbyFacade from "./hobbyFacade";
 
 
 
@@ -58,6 +60,14 @@ facade.getAllPeople()
   const userRowsAsStrings = userRows.join("")
   console.log(userRowsAsStrings);
   document.getElementById("allUserRows").innerHTML = userRowsAsStrings;
+})
+
+hobbyFacade.getAllHobbies()
+.then(hobbies =>{
+  const hobbyOptions = hobbies.map(hobby => `
+  <option>${hobby.name}</option>
+  `).join("")
+  document.getElementById("hobbySelect").innerHTML = hobbyOptions;
 })
 
 var x = document.getElementById("myselect").value;
