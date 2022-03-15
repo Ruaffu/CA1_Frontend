@@ -81,6 +81,16 @@ addNewUserBtn.addEventListener('click', (event)=>{
   })
 })
 
+let deleteBtn = document.getElementById("deleteBtn");
+deleteBtn.addEventListener('click', (event)=>{
+  event.preventDefault();
+  let userId = document.getElementById("userid").value;
+  facade.deletePerson(userId)
+  .then(user =>{
+    alert("user with id: " + userId+ "deleted")
+  })
+})
+
 // facade.getHello()
 // .then(data => {
 //   let hellomsg = document.getElementById("hello");

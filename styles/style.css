@@ -50,6 +50,10 @@ input[type=text], select, button {
   color: azure;
 }
 
+.center-h3 {
+  text-align: center;
+}
+
 .collBtn {
   text-align: center;
   font-weight: bold;
