@@ -31,10 +31,40 @@ searchBTN.addEventListener('click', (event) => {
         
       
     }
-      
-
-    
+ 
 });
+
+let addNewUserBtn = document.getElementById("addNewUserBtn");
+addNewUserBtn.addEventListener('click', (event)=>{
+  event.preventDefault();
+  let newUser = {
+    firstname: document.getElementById("fname").value,
+    lastname: document.getElementById("lname").value,
+    email: document.getElementById("email").value,
+    phones: [
+      {
+        number: document.getElementById("phonenr").value,
+        description: document.getElementById("phoneSelect").value
+      }
+    ],
+    address: {
+      street: document.getElementById("adrstreet").value,
+      additionalInfo: document.getElementById("adradditional").value,
+      city: document.getElementById("adrcity").value,
+      zipcode: document.getElementById("adrzip").value
+    },
+    hobbies: [
+      {
+        description: document.getElementById("hobbySelect").value,
+        name: document.getElementById("hobbySelect").value
+      }
+    ]
+  }
+  facade.addPerson(newUser)
+  .then(user => {
+    alert("User added")
+  })
+})
 
 // facade.getHello()
 // .then(data => {
