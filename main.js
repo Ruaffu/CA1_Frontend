@@ -4,6 +4,8 @@ import './facade'
 import facade from './facade'
 import './hobbyFacade'
 import hobbyFacade from "./hobbyFacade";
+import './cityFacade'
+import cityFacade from "./cityFacade";
 
 
 
@@ -28,7 +30,7 @@ for (i = 0; i < coll.length; i++) {
 let searchBTN = document.getElementById("searchbtn");
 
 searchBTN.addEventListener('click', (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     let selectfield = document.getElementById("myselect").value;
     let inputTextField = document.getElementById("inpuf");
     if (selectfield == "id"){ 
@@ -81,6 +83,45 @@ addNewUserBtn.addEventListener('click', (event)=>{
   })
 })
 
+let editUserBtn = document.getElementById("edit");
+editUserBtn.addEventListener('click', (event)=>{
+  event.preventDefault();
+  let idUser = document.getElementById("iduser").value;
+  let updateUser = {
+    firstname: document.getElementById("efname").value,
+    lastname: document.getElementById("elname").value,
+    email: document.getElementById("eemail").value,
+    phones: [
+      {
+        number: document.getElementById("ephonenr").value,
+        description: document.getElementById("ephoneSelect").value
+      }
+    ],
+    address: {
+      street: document.getElementById("eadrstreet").value,
+      additionalInfo: document.getElementById("eadradditional").value,
+      city: document.getElementById("eadrcity").value,
+      zipcode: document.getElementById("eadrzip").value
+    },
+    hobbies: [
+      {
+        description: document.getElementById("ehobbySelect").value,
+        name: document.getElementById("ehobbySelect").value
+      }
+    ]
+  }
+  facade.editPerson(idUser, updateUser)
+  .then(user =>{
+    alert("user with ID: " + idUser+ " has been updated")
+  })
+  .catch(err =>{
+    if (err.status) {
+      err.fullError.then(e => console.log(e.msg))
+    }
+    else{console.log("Network error");}
+  });
+})
+
 let deleteBtn = document.getElementById("deleteBtn");
 deleteBtn.addEventListener('click', (event)=>{
   event.preventDefault();
@@ -123,6 +164,7 @@ hobbyFacade.getAllHobbies()
   <option>${hobby.name}</option>
   `).join("")
   document.getElementById("hobbySelect").innerHTML = hobbyOptions;
+  document.getElementById("ehobbySelect").innerHTML = hobbyOptions;
 })
 
 
@@ -136,6 +178,18 @@ hobbyFacade.getAllHobbies()
   `).join("")
   document.getElementById("allHobbyRows").innerHTML = displayHobbies;
 })
+
+cityFacade.getAllCityInfo()
+.then(cities =>{
+  const displayCities= cities.map(city => `
+  <tr>
+  <td>${city.city}</td>
+  <td>${city.zipcode}</td>
+</tr>
+  `).join("")
+  document.getElementById("allCityInfoRows").innerHTML = displayCities;
+})
+
 
 
 var x = document.getElementById("myselect").value;
@@ -177,6 +231,12 @@ function getPersonsByPhonenr(phonenr){
     let singlePersonRecord = document.getElementById("singlePersonRecord");
   singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id} firstname: ${data.firstname} lastname: ${data.lastname} email: ${data.email}<br/><br/> 
   <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>`;
+  })
+  .catch(err =>{
+    if (err.status) {
+      err.fullError.then(e => console.log(e.msg))
+    }
+    else{console.log("Network error");}
   });
 }
 

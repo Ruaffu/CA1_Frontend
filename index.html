@@ -41,7 +41,7 @@
                         <p class="small-grey-text">Klik for at søge</p>
                     </div>
                     <div>
-                        <button id="searchbtn">Søg</button>
+                        <button id="searchbtn" class="btnColour">Søg</button>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,49 @@
                       <label for="hobbySelect" >Hobbies (ctrl click to select multiple hobbies):</label>
                       <select id="hobbySelect" multiple>
                     </select><br/><br/>
-                      <button id="addNewUserBtn">Submit</button><br/><br/>
+                      <button id="addNewUserBtn" class="btnColour">Submit</button><br/><br/>
+                    </form>
+                    <p id="confirmation"></p>
+
+                </div>
+            </div>
+            </div>
+            <h3 class="center-heading" style="background-color: black;">Edit User</h3>
+            <button type="button" class="collapsible"><h3 class="collBtn">Open to edit user</h3></button>
+            <div class="content">
+            <div class="flex">
+                <div class="flex" style="border: 1px solid black; width: 100%">
+                    <form>
+                        <h3>User Details:</h3>
+                        <label for="iduser" >ID:</label>
+                      <input type="text" id="iduser"><br>
+                      <label for="efname" >First name:</label>
+                      <input type="text" id="efname"><br>
+                      <label for="elname" >Last name:</label>
+                      <input type="text" id="elname"><br>
+                      <label for="eemail" >Email:</label>
+                      <input type="text" id="eemail"><br>
+                      <label for="ephonenr" >Phone number:</label>
+                      <input type="text" id="ephonenr"><br>
+                      <label for="ephonedesc" >Description:</label>
+                      <select id="ephoneSelect">
+                          <option>Home</option>
+                          <option>Mobile</option>
+                          <option>Work</option>
+                      </select>
+                      <h3>Address</h3>
+                      <label for="eadrstreet" >Street:</label>
+                      <input type="text" id="eadrstreet"><br>
+                      <label for="eadradditional" >Additional info:</label>
+                      <input type="text" id="eadradditional"><br>
+                      <label for="eadrcity" >City:</label>
+                      <input type="text" id="eadrcity"><br>
+                      <label for="eadrzip" >Zipcode:</label>
+                      <input type="text" id="eadrzip"><br>
+                      <label for="ehobbySelect" >Hobbies (ctrl click to select multiple hobbies):</label>
+                      <select id="ehobbySelect" multiple>
+                    </select><br/><br/>
+                      <button id="edit" class="btnColour">Update</button><br/><br/>
                     </form>
                     <p id="confirmation"></p>
 
@@ -101,7 +143,7 @@
                 <div class="flex" style="border: 1px solid black; width: 100%">
                     <label for="userid" >ID:</label>
                     <input type="text" id="userid"><br>
-                    <button id="deleteBtn">Delete</button><br/><br/>
+                    <button id="deleteBtn" class="btnColour">Delete</button><br/><br/>
 
                 </div>
             </div>
@@ -140,6 +182,22 @@
                   </tr>
                 </thead>
                 <tbody id="allHobbyRows">
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <h3 class="center-heading" style="background-color: black;">City info</h3>
+            <button type="button" class="collapsible"><h3 class="collBtn">Open to see City info</h3></button>
+            <div class="content">
+            <div class="flex">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>City</th>
+                    <th>Zipcode</th>
+                  </tr>
+                </thead>
+                <tbody id="allCityInfoRows">
                 </tbody>
               </table>
             </div>
