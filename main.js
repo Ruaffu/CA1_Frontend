@@ -10,6 +10,21 @@ import hobbyFacade from "./hobbyFacade";
 /* 
   Add your JavaScript for all exercises Below or in separate js-files, which you must the import above
 */
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
 let searchBTN = document.getElementById("searchbtn");
 
 searchBTN.addEventListener('click', (event) => {
@@ -99,6 +114,19 @@ hobbyFacade.getAllHobbies()
   `).join("")
   document.getElementById("hobbySelect").innerHTML = hobbyOptions;
 })
+
+
+  hobbyFacade.getAllHobbies()
+.then(hobbies =>{
+  const displayHobbies = hobbies.map(hobby => `
+  <tr>
+  <td>${hobby.name}</td>
+  <td><a href="${hobby.description}">${hobby.description}</a></td>
+</tr>
+  `).join("")
+  document.getElementById("allHobbyRows").innerHTML = displayHobbies;
+})
+
 
 var x = document.getElementById("myselect").value;
 
