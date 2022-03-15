@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Single Page Application</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+  
+    <div class="flex">
+        <div class="flex-column">
+            <div class="flex">
+                <div class="flex-column">
+                    <div>
+                        <p class="small-grey-text">Søg</p>
+                    </div>
+                    <div class="flex">
+                        <input type="text" id="inpuf">
+                    </div>
+                </div>
+                <div class="flex-column">
+                    <div>
+                        <p class="small-grey-text">Filter</p>
+                    </div>
+                    <div>
+                        <select id="myselect">
+                            <option >id</option>
+                            <option >Zipcode</option>
+                            <option >Hobby</option>
+                            <option >Phone number</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <div>
+                        <p class="small-grey-text">Klik for at søge</p>
+                    </div>
+                    <div>
+                        <button id="searchbtn">Søg</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <div style="border: 1px solid black; width: 100%">
+                  <h3>Search result:</h3>
+                    <p id="hello"></p>
+                    <p id="singlePersonRecord"></p>
+                  
+                </div>
+            </div>
+            <h3>All People</h3>
+            <div class="flex">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Phone nr</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>Zipcode</th>
+                  </tr>
+                </thead>
+                <tbody id="allUserRows">
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </div>
+  
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
