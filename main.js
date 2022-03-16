@@ -9,9 +9,7 @@ import cityFacade from "./cityFacade";
 
 
 
-/* 
-  Add your JavaScript for all exercises Below or in separate js-files, which you must the import above
-*/
+
 
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -88,6 +86,7 @@ editUserBtn.addEventListener('click', (event)=>{
   event.preventDefault();
   let idUser = document.getElementById("iduser").value;
   let updateUser = {
+    id: idUser,
     firstname: document.getElementById("efname").value,
     lastname: document.getElementById("elname").value,
     email: document.getElementById("eemail").value,
@@ -105,8 +104,8 @@ editUserBtn.addEventListener('click', (event)=>{
     },
     hobbies: [
       {
-        description: document.getElementById("ehobbySelect").value,
-        name: document.getElementById("ehobbySelect").value
+        name: document.getElementById("ehobbySelect").value,
+        description: document.getElementById("ehobbySelect").value
       }
     ]
   }
@@ -121,6 +120,8 @@ editUserBtn.addEventListener('click', (event)=>{
     else{console.log("Network error");}
   });
 })
+
+
 
 let deleteBtn = document.getElementById("deleteBtn");
 deleteBtn.addEventListener('click', (event)=>{
@@ -147,14 +148,14 @@ facade.getAllPeople()
     <td>${person.firstname}</td>
     <td>${person.lastname}</td>
     <td>${person.email}</td>
-    <td>${person.phones.number}</td>
+    <td>${JSON.stringify(person.phones[0], ['number'])}</td>
     <td>${person.address.street} ${person.address.additionalInfo}</td>
     <td>${person.address.city}</td>
     <td>${person.address.zipcode}</td>
+    <td>${JSON.stringify(person.hobbies[0], ['name'])}</td>
   </tr>
   `)
   const userRowsAsStrings = userRows.join("")
-  console.log(userRowsAsStrings);
   document.getElementById("allUserRows").innerHTML = userRowsAsStrings;
 })
 
@@ -198,8 +199,9 @@ function getPersonById(id){
   facade.getPerson(id)
 .then(data => {
   let singlePersonRecord = document.getElementById("singlePersonRecord");
-  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id} firstname: ${data.firstname} lastname: ${data.lastname} email: ${data.email}<br/><br/> 
-  <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>`;
+  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+  <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/><br/>
+  <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`;
   // singlePersonRecord.innerHTML = renderObjectToHTML(data);
 });
 
@@ -208,8 +210,9 @@ function getPersonById(id){
 function getPersonsByHobby(hobby){
   facade.getPersonByHobby(hobby)
   .then(people => {
-    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id} firstname: ${data.firstname} lastname: ${data.lastname} email: ${data.email}<br/><br/> 
-    <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>`).join("")
+    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+    <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>
+    <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`).join("")
     let singlePersonRecord = document.getElementById("singlePersonRecord");
     singlePersonRecord.innerHTML = users;
   });
@@ -218,8 +221,9 @@ function getPersonsByHobby(hobby){
 function getPersonsByZip(zipcode){
   facade.getPersonByZipcode(zipcode)
   .then(people => {
-    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id} firstname: ${data.firstname} lastname: ${data.lastname} email: ${data.email}<br/><br/> 
-    <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>`).join("")
+    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+    <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>
+    <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`).join("")
     let singlePersonRecord = document.getElementById("singlePersonRecord");
     singlePersonRecord.innerHTML = users;
   });
@@ -229,8 +233,9 @@ function getPersonsByPhonenr(phonenr){
   facade.getPersonByPhone(phonenr)
   .then(data => {
     let singlePersonRecord = document.getElementById("singlePersonRecord");
-  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id} firstname: ${data.firstname} lastname: ${data.lastname} email: ${data.email}<br/><br/> 
-  <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>`;
+  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+  <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>
+  <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`;
   })
   .catch(err =>{
     if (err.status) {
@@ -241,19 +246,7 @@ function getPersonsByPhonenr(phonenr){
 }
 
 
-function renderObjectToHTML(myPersonObj) {
-  result = `id: ${myPersonObj.id}<br/>
-  firstname: ${myPersonObj.firstname}<br/><br/>
-  lastname: ${myPersonObj.lastname}<br/><br/>
-  email: ${myPersonObj.email}<br/><br/>
-  <strong>Address: </strong><br/>
-  id: ${myPersonObj.address.id} <br/>
-  street: ${myPersonObj.address.street} <br/>
-  additionalInfo: ${myPersonObj.address.additionalInfo} <br/>
-  city: ${myPersonObj.address.city} <br/>
-  zipcode: ${myPersonObj.address.address.zipcode}<br/>`
-  return result;
-}
+
 
 // function hideAllShowOne(idToShow)
 // {

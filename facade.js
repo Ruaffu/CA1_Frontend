@@ -37,7 +37,6 @@ function addPerson(user){
 
 function editPerson(id,user){
     const options = makeOptions("PUT", user)
-    console.log(id);
     return fetch(URL+"/edit/"+id, options)
     .then(handleHttpErrors)
     
