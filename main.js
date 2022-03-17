@@ -138,7 +138,21 @@ deleteBtn.addEventListener('click', (event)=>{
 //   let hellomsg = document.getElementById("hello");
 //   hellomsg.innerHTML = `msg: ${data.msg}`
 // })
+function getphone(person){
+    if (person.phones.length > 0){
+      return [person.phones[0].id,person.phones[0].number,person.phones[0].description]
+    } else {
+      return ["No Number","No Number","No Number"];
+    }
+}
 
+function getHobbies(person){
+    if (person.hobbies.length > 0){
+      return [person.hobbies[0].id,person.hobbies[0].name,person.hobbies[0].description]
+    } else {
+      return ["No Hobby","No Hobby","No Hobby"];
+    }
+}
 
 facade.getAllPeople()
 .then(persons => {
@@ -148,11 +162,11 @@ facade.getAllPeople()
     <td>${person.firstname}</td>
     <td>${person.lastname}</td>
     <td>${person.email}</td>
-    <td>${JSON.stringify(person.phones[0], ['number'])}</td>
+    <td>${getphone(person)[1]}</td>
     <td>${person.address.street} ${person.address.additionalInfo}</td>
     <td>${person.address.city}</td>
     <td>${person.address.zipcode}</td>
-    <td>${JSON.stringify(person.hobbies[0], ['name'])}</td>
+    <td>${getHobbies(person)[1]}</td>
   </tr>
   `)
   const userRowsAsStrings = userRows.join("")
@@ -199,10 +213,9 @@ function getPersonById(id){
   facade.getPerson(id)
 .then(data => {
   let singlePersonRecord = document.getElementById("singlePersonRecord");
-  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${getphone(data)[1]}<br/><br/> 
   <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/><br/>
-  <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`;
-  // singlePersonRecord.innerHTML = renderObjectToHTML(data);
+  <strong>Hobbies: </strong><br/> id: ${getHobbies(data)[0]}<br/> name: ${getHobbies(data)[1]}<br/> description: ${getHobbies(data)[2]}<br/>`;
 });
 
 }
@@ -210,9 +223,9 @@ function getPersonById(id){
 function getPersonsByHobby(hobby){
   facade.getPersonByHobby(hobby)
   .then(people => {
-    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${getphone(data)[1]}<br/><br/> 
     <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>
-    <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`).join("")
+    <strong>Hobbies: </strong><br/> id: ${getHobbies(data)[0]}<br/> name: ${getHobbies(data)[1]}<br/> description: ${getHobbies(data)[2]}<br/>`).join("")
     let singlePersonRecord = document.getElementById("singlePersonRecord");
     singlePersonRecord.innerHTML = users;
   });
@@ -221,9 +234,9 @@ function getPersonsByHobby(hobby){
 function getPersonsByZip(zipcode){
   facade.getPersonByZipcode(zipcode)
   .then(people => {
-    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+    const users = people.map(data =>` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${getphone(data)[1]}<br/><br/> 
     <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>
-    <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`).join("")
+    <strong>Hobbies: </strong><br/> id: ${getHobbies(data)[0]}<br/> name: ${getHobbies(data)[1]}<br/> description: ${getHobbies(data)[2]}<br/>`).join("")
     let singlePersonRecord = document.getElementById("singlePersonRecord");
     singlePersonRecord.innerHTML = users;
   });
@@ -233,9 +246,9 @@ function getPersonsByPhonenr(phonenr){
   facade.getPersonByPhone(phonenr)
   .then(data => {
     let singlePersonRecord = document.getElementById("singlePersonRecord");
-  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${data.phones.number}<br/><br/> 
+  singlePersonRecord.innerHTML = ` <br/><strong>Person: </strong><br/> id: ${data.id}<br/> firstname: ${data.firstname}<br/> lastname: ${data.lastname}<br/> email: ${data.email}<br/> phone: ${getphone(data)[1]}<br/><br/> 
   <strong>Address: </strong><br/> id: ${data.address.id}<br/> street: ${data.address.street}<br/> city: ${data.address.city}<br/> zipcode: ${data.address.zipcode}<br/>
-  <strong>Hobbies: </strong><br/> id: ${data.hobbies.id}<br/> name: ${data.hobbies.name}<br/> description: ${data.hobbies.description}<br/>`;
+  <strong>Hobbies: </strong><br/> id: ${getHobbies(data)[0]}<br/> name: ${getHobbies(data)[1]}<br/> description: ${getHobbies(data)[2]}<br/>`;
   })
   .catch(err =>{
     if (err.status) {
@@ -245,29 +258,3 @@ function getPersonsByPhonenr(phonenr){
   });
 }
 
-
-
-
-// function hideAllShowOne(idToShow)
-// {
-//   document.getElementById("about_html").style = "display:none"
-//   document.getElementById("ex1_html").style = "display:none"
-//   document.getElementById("ex2_html").style = "display:none"
-//   document.getElementById("ex3_html").style = "display:none"
-//   document.getElementById(idToShow).style = "display:block"
-// }
-
-// function menuItemClicked(evt)
-// {
-//   const id = evt.target.id;
-//   switch (id)
-//   {
-//     case "ex1": hideAllShowOne("ex1_html"); break
-//     case "ex2": hideAllShowOne("ex2_html"); break
-//     case "ex3": hideAllShowOne("ex3_html"); break
-//     default: hideAllShowOne("about_html"); break
-//   }
-//   evt.preventDefault();
-// }
-// document.getElementById("menu").onclick = menuItemClicked;
-// hideAllShowOne("about_html");
